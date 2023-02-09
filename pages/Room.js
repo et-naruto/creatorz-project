@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Data from "/pages/Room";
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import supabase from "../utils/supabase";
+import 'bootstrap/dist/css/bootstrap.css';
 
 export default function Room({ session }) {
   const supabase = useSupabaseClient();
@@ -24,9 +25,14 @@ export default function Room({ session }) {
               obj[key] = payload[key];
               return obj;
             }, {});
-          console.log(filteredUsers)
-          const obj = JSON.stringify(filteredUsers);
-          document.getElementById("demo").innerHTML = obj;
+          let filteredValue = Object.values(filteredUsers)
+          filteredValue = Object.values(filteredValue[0])
+          const fish_fed = filteredValue[0]
+          const id = filteredValue[1]
+          const time_fed = filteredValue[2]          
+          document.getElementById("fish_fed").innerHTML = `fish_fed : ${fish_fed}`;
+          document.getElementById("id").innerHTML = `id : ${id}`;
+          document.getElementById("time_fed").innerHTML = `time_fed : ${time_fed}`;
         }
       )
       .subscribe();
@@ -61,9 +67,19 @@ export default function Room({ session }) {
 
   return (
     <>
-      <div>
-        <button onClick={handleSubmit}>Feed</button>
-        <pre id="demo"></pre>
+      <div class="container mt-5">
+        <div class="row">
+        <div class="col-4" />
+        <div class=" col-4">
+          <button class="btn btn-outline-success btn-lg --bs-success" onClick={handleSubmit}>Feed</button>
+          <br></br>
+          <br></br>
+            <p class="font-family-roboto" id="id"></p>
+            <p id="time_fed"></p>
+            <p id="fish_fed"></p>
+        </div>
+        <div class="col-4" />
+        </div>
       </div>
     </>
   );

@@ -5,6 +5,7 @@ import {
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Room from "../pages/Room"
+import 'bootstrap/dist/css/bootstrap.css';
 
 
 export default function Account({ session }) {
